@@ -19,14 +19,21 @@ class Game:
             self.__current_player = 1
 
     def read_position(self):
+        cord = 0
         if self.__current_player == 1:
-            cord = self.__players[0].read_position()
-            self.__fields[0].shoot_at(cord)
-            self.change_player()
+            while cord == 0:
+                cord = self.__players[0].read_position()
+            if self.__fields[0].shoot_at(cord):
+                print("Good job! You can shoot one more")
+            else:
+                self.change_player()
         elif self.__current_player == 2:
-            cord = self.__players[1].read_position()
-            self.__fields[1].shoot_at(cord)
-            self.change_player()
+            while cord == 0:
+                cord = self.__players[1].read_position()
+            if self.__fields[1].shoot_at(cord):
+                print("Good job! You can shoot one more")
+            else:
+                self.change_player()
 
     def field_with_ships(self):
         if self.__current_player == 1:
@@ -36,13 +43,27 @@ class Game:
 
     def field_without_ships(self):
         if self.__current_player == 1:
-            return self.__fields[0].field_without_ships()
-        elif self.__current_player == 2:
             return self.__fields[1].field_without_ships()
+        elif self.__current_player == 2:
+            return self.__fields[0].field_without_ships()
 
-    @staticmethod
-    def end_game():
+    def end_game(self):
+        print(str(self.__players[0].name) + " score is: "
+              + str(self.__fields[0].score))
+        print(str(self.__players[1].name) + " score is: "
+              + str(self.__fields[1].score))
         Game.play = False
+
+    def winner(self):
+        if self.__current_player == 1:
+            if self.__fields[0].winner():
+                print(self.__players[0].name + "is winner!")
+                return False
+        elif self.__current_player == 2:
+            if self.__fields[1].winner():
+                print(self.__players[1].name + "is winner!")
+                return False
+        return True
 
     @staticmethod
     def introduction():
