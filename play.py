@@ -4,7 +4,7 @@ from Game import Game
 def main():
     game = Game()
     game.introduction()
-    while game.winner():
+    while Game.play:
         print("There is your field: ")
         print(game.field_with_ships())
         print("\n")
