@@ -58,12 +58,11 @@ class Game:
         if self.__current_player == 1:
             if self.__fields[0].winner():
                 print(self.__players[0].name + "is winner!")
-                return False
+                Game.play = False
         elif self.__current_player == 2:
             if self.__fields[1].winner():
                 print(self.__players[1].name + "is winner!")
-                return False
-        return True
+                Game.play = False
 
     @staticmethod
     def introduction():
