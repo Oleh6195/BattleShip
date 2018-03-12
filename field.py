@@ -131,7 +131,7 @@ class Field:
             shp = Ship(ship[0], ship[2], ship[1], ship[3])
             shipses.append(shp)
 
-        self.ships = shipses
+        self.__ships = shipses
 
     def shoot_at(self, cordinates):
         """
@@ -139,7 +139,7 @@ class Field:
         Change point which user shooted in
         """
         status = False
-        for ship in self.ships:
+        for ship in self.__ships:
             if cordinates in ship.get_cordanates():
                 status = True
                 self.score += 1
@@ -163,7 +163,7 @@ class Field:
 
     def winner(self):
         lst = []
-        for ship in self.ships:
+        for ship in self.__ships:
             if ship.length == len(ship.hit):
                 lst.append(True)
         if len(lst) == 10:
