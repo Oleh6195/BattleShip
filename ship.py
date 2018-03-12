@@ -5,8 +5,8 @@ class Ship:
     def __init__(self, bow, horizontal, lenght, hit):
         self.bow = bow
         self.horizontal = horizontal
-        self.length = lenght
-        self.hit = hit[:]
+        self.__length = lenght
+        self.__hit = hit[:]
 
     def get_cordanates(self):
         """
@@ -16,10 +16,10 @@ class Ship:
         letters = "ABCDEFGHIJ"
         cordinates = []
         if self.horizontal:
-            for point in range(1, max(self.length)):
+            for point in range(1, max(self.__length)):
                 cordinates.append((self.bow[0], self.bow[1] + point))
         elif not self.horizontal:
-            for point in range(1, max(self.length)):
+            for point in range(1, max(self.__length)):
                 cordinates.append((letters[letters.index(self.bow[0]) + point],
                                   self.bow[1]))
         return cordinates
@@ -30,4 +30,4 @@ class Ship:
         :param cordinates:
         :return:
         """
-        self.hit.append(cordinates)
+        self.__hit.append(cordinates)
