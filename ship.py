@@ -1,29 +1,33 @@
-class Player:
+class Ship:
     """
-    This class represents player
+    This class represents ship and his methods
     """
-    num = 1
+    def __init__(self, bow, horizontal, lenght, hit):
+        self.bow = bow
+        self.horizontal = horizontal
+        self.__length = lenght
+        self.__hit = hit[:]
 
-    def __init__(self, name):
-        self.__name = name
-        self.id = Player.num
-        Player.num += 1
-
-    def read_position(self):
+    def get_cordanates(self):
         """
-        Give a request to enter cordinates
+        Makes list with cordinates all point of ship
         :return:
         """
         letters = "ABCDEFGHIJ"
-        try:
-            position = input(self.__name + ", enter move: ")
-            x = str(position[0])
-            y = int(position[1])
-            if x in letters and y in range(10):
-                return x, y
-            else:
-                print("Enter validate cordinates(example: B1)")
-                return 0
-        except:
-            print("Enter validate cordinates(example: B1)")
-            return 0
+        cordinates = []
+        if self.horizontal:
+            for point in range(1, max(self.__length)):
+                cordinates.append((self.bow[0], self.bow[1] + point))
+        elif not self.horizontal:
+            for point in range(1, max(self.__length)):
+                cordinates.append((letters[letters.index(self.bow[0]) + point],
+                                  self.bow[1]))
+        return cordinates
+
+    def shoot_at(self, cordinates):
+        """
+        Shoot to point of ship
+        :param cordinates:
+        :return:
+        """
+        self.__hit.append(cordinates)
