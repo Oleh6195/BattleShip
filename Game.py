@@ -48,22 +48,23 @@ class Game:
             return self.__fields[0].field_without_ships()
 
     def end_game(self):
-        print(str(self.__players[0].name) + " score is: "
+        print(str(self.__players[0]._Player__name) + " score is: "
               + str(self.__fields[0].score))
-        print(str(self.__players[1].name) + " score is: "
+        print(str(self.__players[1]._Player__name) + " score is: "
               + str(self.__fields[1].score))
         Game.play = False
 
     def winner(self):
         if self.__current_player == 1:
             if self.__fields[0].winner():
-                print(self.__players[0].name + "is winner!")
+                print(self.__players[0]._Player__name + "is winner!")
                 Game.play = False
         elif self.__current_player == 2:
             if self.__fields[1].winner():
-                print(self.__players[1].name + "is winner!")
+                print(self.__players[1]._Player__name + "is winner!")
                 Game.play = False
 
     @staticmethod
     def introduction():
         print("Welcome to the BATTLESHIP!!!")
+
